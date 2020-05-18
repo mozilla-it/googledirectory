@@ -60,10 +60,10 @@ class GoogleDirectory:
             print("Could not remove member: {}".format(str(e)))
     def get_all_groups(self):
         results = self.service.groups().list(customer='my_customer').execute()
-        return [ x['email'] for x in results['groups'] ]
+        return [ x['email'] for x in results.get('groups',[]) ]
     def list_group_members(self,group):
         results = self.service.members().list(groupKey=group).execute()
-        return [ x['email'] for x in results['members'] ]
+        return [ x['email'] for x in results.get('members',[]) ]
     def create_group(self,group):
         results = self.service.groups().insert(body={'email': group}).execute()
         return results

@@ -10,7 +10,8 @@ setup(
     author="Mozilla IT Service Engineering",
     author_email="afrank@mozilla.com",
     packages=find_packages(),
-    scripts=['bin/google-groups'],
-    install_requires=['google-api-python-client','google-auth-httplib2','google-auth-oauthlib','oauth2client']
+    entry_points={"console_scripts": ["google-groups=googledirectory.cli:main",],},
+    install_requires=['google-api-python-client','google-auth-httplib2','google-auth-oauthlib','oauth2client', 'google-auth'],
+    project_urls={"Source": "https://github.com/mozilla-it/googledirectory",},
+    test_suite="tests.unit",
 )
-
