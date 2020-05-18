@@ -20,10 +20,11 @@ if __name__ == "__main__":
   parser.add_argument('-g','--group', help='Google group to affect', default=None)
   parser.add_argument('-a','--add', help='Email of member to add to group', default=None)
   parser.add_argument('-x','--delete', help='Email of member to remove from group', default=None)
+  parser.add_argument('-C','--create', action='store_true', help='Create Group', default=False)
   
   args = parser.parse_args()
 
-  if not args.list and not args.add and not args.delete:
+  if not args.list and not args.add and not args.delete and not args.create:
     args.list = True
 
   g = GoogleDirectory()
@@ -34,6 +35,14 @@ if __name__ == "__main__":
   elif args.list and args.group:
     print(json.dumps(g.list_group_members(args.group)))
     exit(0)
+
+  if not args.group:
+    print("Must specify group")
+    exit(2)
+
+  if args.create:
+      print(g.create_group(args.group))
+      exit(0)
 
   if args.add and args.group:
     g.add_member(args.group,args.add)

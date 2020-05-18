@@ -64,5 +64,8 @@ class GoogleDirectory:
     def list_group_members(self,group):
         results = self.service.members().list(groupKey=group).execute()
         return [ x['email'] for x in results['members'] ]
+    def create_group(self,group):
+        results = self.service.groups().insert(body={'email': group}).execute()
+        return results
 
 
